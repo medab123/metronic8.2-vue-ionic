@@ -15,15 +15,35 @@
     <meta name="msapplication-tap-highlight" content="no" />
 
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700">
+    <link rel="stylesheet" href="/splash-screen.css">
     <!-- add to homescreen for ios -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Ionic App" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    
   </head>
 
-  <body>
+  <body class="page-loading">
+    <script>
+      let themeMode = "system";
+
+      if (localStorage.getItem("kt_theme_mode_value")) {
+          themeMode = localStorage.getItem("kt_theme_mode_value");
+      }
+
+      if (themeMode === "system") {
+          themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      document.documentElement.setAttribute("data-bs-theme", themeMode);
+  </script>
     <div id="app"></div>
+    <div id="splash-screen" class="splash-screen">
+      <img src="/media/logos/default-dark.svg" class="dark-logo" alt="Metronic dark logo" />
+      <img src="/media/logos/default.svg" class="light-logo" alt="Metronic light logo" />
+      <span>Loading ...</span>
+  </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 
